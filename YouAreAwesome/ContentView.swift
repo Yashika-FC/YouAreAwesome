@@ -11,35 +11,45 @@ struct ContentView: View {
     @State private var message = "You Are Awesome!";
     
     var body: some View {
-        HStack {
-            Image(systemName: "iphone.gen1.circle.fill")
-                .resizable()
-                .scaledToFit()
-                .foregroundStyle(.cyan)
-            
-            Image(systemName: "cloud.sun.rain.circle.fill")
-                .resizable()
-                .scaledToFit()
-                .foregroundStyle(.red)
-            
-            Image(systemName: "swift")
-                .resizable()
-                .scaledToFit()
-                .foregroundStyle(.orange)
-        }
+        VStack{
+            Spacer()
                 
-            Text(message)
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .foregroundStyle(Color(.purple))
-        
-        Button("Click Me!") {
-            message="Awesome!"
-            print("You clicked me!")
-            print(message)
-        }
+                
+            Image(systemName: "swift")
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundStyle(.orange)
+                    .frame(width: 200, height: 200)
+                    .padding()
             
+            
+            Text(message)
+                    .font(.largeTitle)
+                    .fontWeight(.ultraLight)
+                    .foregroundStyle(.black)
+            
+            Spacer()
+            
+            HStack{
+                Button("Awesome!") {
+                    message="Awesome!"
+                    print("You clicked me!")
+                    print(message)
+                }
+                
+                Button("Great!") {
+                    message="Great!"
+                    print("You clicked me!")
+                    print(message)
+                }
+            }
+            .buttonStyle(.borderedProminent)
+            .font(.title2)
+            .fontWeight(.heavy)
+            .foregroundStyle(.white)
+            .tint(.orange)
         
+        }
         .padding()
     }
 }
