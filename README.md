@@ -1,4 +1,4 @@
 You Are Awesome App is finally Here!!!
 
 
-<img width="323" height="531" alt="image" src="https://github.com/user-attachments/assets/68f20857-4602-439a-a685-5f56154c685d" />
+<img width="409" height="672" alt="image" src="https://github.com/user-attachments/assets/3643886c-7e93-47a9-9a25-696825fb51e4" />
