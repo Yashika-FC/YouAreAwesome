@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var message = "You Are Awesome!";
+    
     var body: some View {
         HStack {
             Image(systemName: "iphone.gen1.circle.fill")
@@ -26,10 +28,16 @@ struct ContentView: View {
                 .foregroundStyle(.orange)
         }
                 
-            Text("You Are Awesome!")
+            Text(message)
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .foregroundStyle(Color(.purple))
+        
+        Button("Click Me!") {
+            message="Awesome!"
+            print("You clicked me!")
+            print(message)
+        }
             
         
         .padding()
