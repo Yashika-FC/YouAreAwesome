@@ -11,9 +11,17 @@ struct ContentView: View {
     
     //    Inside Struct Curlies , so have structwide scopes and can be used widely anywhere within this struct.. also with any views inside this struct  like Image , Text and Button here
     
-    @State private var message = "You Are Awesome!";
+    
+    @State private var message = "Hey there!";
     @State private var toggle = true;
-    @State private var img:String="swift"
+    
+    //    In swift var can hold only one type of data, if we create variable to hold a string, later on we cannot put a number to it
+    @State private var imgNum = 0;
+    
+    //    Since Now we are not using SystemName keyword (which works for Swift inbuilt images and icons), so now we cant set starting image as "swift" or any inbuilt image
+    
+    @State private var img = "";
+    
     
     //    anything defined here is structwide and can be used anywhere within this struct
     
@@ -22,29 +30,28 @@ struct ContentView: View {
             Spacer()
             
             
-            Image(systemName: img)
+            Image(img)
                 .resizable()
                 .scaledToFit()
-                .foregroundStyle(.orange)
-                .frame(width: 200, height: 200)
-                .padding()
+                .clipShape(.rect(cornerRadius: 20))
+                .shadow(radius: 100)
             
             
             Text(message)
                 .font(.largeTitle)
-                .fontWeight(.ultraLight)
-                .foregroundStyle(.black)
+                .fontWeight(.heavy)
+                .foregroundStyle(.red)
             
             Spacer()
             
             
             
             
-            Button("Press Me!") {
+            Button("Show Message!") {
                 
                 //                Using Ternary Operator
                 message=toggle ? "You Are Awesome!" : "You Are Great!"
-                img=toggle ? "sun.max.fill" : "hand.thumbsup.fill"
+                img="image\(imgNum)"
                 
                 //                if (toggle==true){
                 //                    message="You Are Awesome!"
@@ -56,6 +63,14 @@ struct ContentView: View {
                 //                }
                 
                 toggle = !toggle
+                
+                //TODO: -Update the image name variable-
+                print("This is the \(imgNum)th click!")
+                imgNum+=1;
+                if (imgNum>9){
+                    imgNum=0;
+                }
+
                 print("You clicked -> \(message)")
                 
             }
