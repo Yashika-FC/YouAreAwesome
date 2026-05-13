@@ -16,8 +16,8 @@ struct ContentView: View {
     @State private var toggle = true;
     
     //    In swift var can hold only one type of data, if we create variable to hold a string, later on we cannot put a number to it
-    @State private var imgNum = 0;
-    @State private var msgNum = 0;
+//    @State private var imgNum = 0;
+//    @State private var msgNum = 0;
     
     //    Since Now we are not using SystemName keyword (which works for Swift inbuilt images and icons), so now we cant set starting image as "swift" or any inbuilt image
     
@@ -78,23 +78,23 @@ struct ContentView: View {
                 
                 //                toggle = !toggle
                 
-                message=msgsArr[msgNum]
-                img="image\(imgNum)"
+                message=msgsArr[Int.random(in: 0...msgsArr.count-1)]
+                img="image\(Int.random(in: 0...9))"
                 
                 //TODO: -Update the image name variable-
-                print("This is the \(imgNum)th image and \(msgNum)th msg!")
-                print("You clicked -> \(message)")
-                
-                imgNum+=1;
-                if (imgNum>9){
-                    imgNum=0;
-                }
-                
-                msgNum+=1;
-                if msgNum>msgsArr.count-1{
-                    msgNum=0;
-                }
-                
+//                print("This is the \(imgNum)th image and \(msgNum)th msg!")
+//                print("You clicked -> \(message)")
+//                
+//                imgNum+=1;
+//                if (imgNum>9){
+//                    imgNum=0;
+//                }
+//                
+//                msgNum+=1;
+//                if msgNum>msgsArr.count-1{
+//                    msgNum=0;
+//                }
+//                
                 
                 
             }
