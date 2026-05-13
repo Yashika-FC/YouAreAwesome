@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+    //    anything defined here is structwide and can be used anywhere within this struct
+    
     //    Inside Struct Curlies , so have structwide scopes and can be used widely anywhere within this struct.. also with any views inside this struct  like Image , Text and Button here
     
     
@@ -25,7 +27,10 @@ struct ContentView: View {
     @State private var msgsArr : [String] = ["You Are Awesome!", "Fabulous? That\'s You!", "You Are Marvelous!", "You Make Me Smile!", "I Think You\'re Magic!", "You Are Skilled", "You Are so Kind!", "You Are Perfect!" ,"You are the Best Version of Yourself!","You Are The Best!)"]
     
     
-    //    anything defined here is structwide and can be used anywhere within this struct
+    @State private var lastMsgIdx : Int = -1;
+    @State private var lastImgIdx : Int = -1;
+
+    
     
     var body: some View {
         VStack{
@@ -58,44 +63,24 @@ struct ContentView: View {
             
             Spacer()
             
-            
-            
-            
             Button("Show Message!") {
                 
-                //                Using Ternary Operator
-                //                message=toggle ? "You Are Awesome!" : "You Are Great!"
-                //                img="image\(imgNum)"
+                var msgIdx : Int;
+                var imgIdx : Int;
                 
-                //                if (toggle==true){
-                //                    message="You Are Awesome!"
-                //                    img="sun.max.fill"
-                //                }
-                //                else{
-                //                    message="You Are Great!"
-                //                    img="hand.thumbsup.fill"
-                //                }
+                repeat {
+                    msgIdx = Int.random(in: 0...msgsArr.count-1)
+                }while (msgIdx == lastMsgIdx)
                 
-                //                toggle = !toggle
+                message=msgsArr[msgIdx]
+                lastMsgIdx = msgIdx;
                 
-                message=msgsArr[Int.random(in: 0...msgsArr.count-1)]
-                img="image\(Int.random(in: 0...9))"
+                repeat {
+                    imgIdx = (Int.random(in: 0...9))
+                }while (imgIdx == lastImgIdx)
                 
-                //TODO: -Update the image name variable-
-//                print("This is the \(imgNum)th image and \(msgNum)th msg!")
-//                print("You clicked -> \(message)")
-//                
-//                imgNum+=1;
-//                if (imgNum>9){
-//                    imgNum=0;
-//                }
-//                
-//                msgNum+=1;
-//                if msgNum>msgsArr.count-1{
-//                    msgNum=0;
-//                }
-//                
-                
+                img = "image\(imgIdx)"
+                lastImgIdx = imgIdx;
                 
             }
             .buttonStyle(.borderedProminent)
