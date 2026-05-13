@@ -5,7 +5,9 @@
 //  Created by yashika.aggarwal.in on 08/05/26.
 //
 
-import SwiftUI
+import SwiftUI;
+//import adds frameworks (sometimes called modules) to expand capabilities avaible to programmers.  gives access to additional methods and data sructures so you can include addtional fucntionality in your programs
+import AVFAudio;
 
 struct ContentView: View {
     
@@ -26,9 +28,17 @@ struct ContentView: View {
     @State private var img = "";
     @State private var msgsArr : [String] = ["You Are Awesome!", "Fabulous? That\'s You!", "You Are Marvelous!", "You Make Me Smile!", "I Think You\'re Magic!", "You Are Skilled", "You Are so Kind!", "You Are Perfect!" ,"You are the Best Version of Yourself!","You Are The Best!)"]
     
+//    Every stored property  @State must have a value before initialization completes.
+    @State private var soundName = "";
     
     @State private var lastMsgIdx : Int = -1;
     @State private var lastImgIdx : Int = -1;
+    @State private var lastSoundIdx : Int = -1;
+    
+    private let numOfImages = 10;
+    private let numOfSounds = 6;
+    
+    @State private var audioPlayer : AVAudioPlayer!;
 
     
     
@@ -51,6 +61,8 @@ struct ContentView: View {
 //            .easeInOut is same as default animation with duration property, .linear is the normal animation
                 .animation(.easeInOut(duration: 0.15), value: message)
             
+            Spacer()
+            
             Image(img)
                 .resizable()
                 .scaledToFit()
@@ -67,6 +79,8 @@ struct ContentView: View {
                 
                 var msgIdx : Int;
                 var imgIdx : Int;
+                var soundIdx : Int;
+
                 
                 repeat {
                     msgIdx = Int.random(in: 0...msgsArr.count-1)
@@ -76,12 +90,34 @@ struct ContentView: View {
                 lastMsgIdx = msgIdx;
                 
                 repeat {
-                    imgIdx = (Int.random(in: 0...9))
+                    imgIdx = (Int.random(in: 0...(numOfImages-1)))
                 }while (imgIdx == lastImgIdx)
                 
                 img = "image\(imgIdx)"
                 lastImgIdx = imgIdx;
                 
+                
+                repeat {
+                    soundIdx = (Int.random(in: 0...(numOfSounds-1)))
+                }while (soundIdx == lastSoundIdx)
+                
+                soundName = "sound\(soundIdx)"
+                lastSoundIdx = soundIdx;
+                
+//                 guard is swift keyword means can be used by non apple products while NSDataAsset is of Apple, which Non-apple products cant use
+                guard let soundFile = NSDataAsset(name: soundName) else{
+                    print("😡 Could Not read file name \(soundName)")
+                    return
+                }
+                
+//                do-try-catch --> for error handling
+                do {
+                    audioPlayer = try AVAudioPlayer(data: soundFile.data)
+                    audioPlayer.play()
+                }
+                catch {
+                    print("😡 ERROR: \(error.localizedDescription) creating audioPlayer")
+                }
             }
             .buttonStyle(.borderedProminent)
             .font(.title2)
